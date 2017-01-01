@@ -30,5 +30,11 @@ namespace WeeklyScheduler
             nameTextBox.Clear();
             startDatePicker.SelectedDate = null;
         }
+
+        private void newTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewTaskDialog dialog = new WeeklyScheduler.NewTaskDialog();
+            dialog.ShowDialog();
+        }
     }
 }
