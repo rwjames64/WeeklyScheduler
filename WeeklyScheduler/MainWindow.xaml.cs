@@ -24,5 +24,11 @@ namespace WeeklyScheduler
         {
             InitializeComponent();
         }
+
+        private void newScheduleButton_Click(object sender, RoutedEventArgs e)
+        {
+            nameTextBox.Clear();
+            startDatePicker.SelectedDate = null;
+        }
     }
 }
