@@ -8,7 +8,7 @@
         Title="MainWindow" Height="484.688" Width="788.686">
     <Grid Margin="0">
         <Label x:Name="titleLabel" Content="WEEKLY SCHEDULE" HorizontalAlignment="Center" Margin="227,28,238,0" VerticalAlignment="Top" FontSize="36"/>
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Height="23" Margin="0,45,500,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="Name"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Height="23" Margin="0,45,500,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SpellCheck.IsEnabled="True"/>
         <DatePicker HorizontalAlignment="Center" Margin="500,45,0,0" VerticalAlignment="Top"/>
         <ListView x:Name="listView" HorizontalAlignment="Center" Margin="10,90,0,150" Width="707">
             <ListView.View>
@@ -32,6 +32,7 @@
         <Separator HorizontalAlignment="Center" Height="1" Margin="430,0,0,90" VerticalAlignment="Bottom" Width="280"/>
         <Separator HorizontalAlignment="Center" Height="1" Margin="0,0,260,90" VerticalAlignment="Bottom" Width="280"/>
         <Button x:Name="newScheduleButton" Content="New Schedule" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="nameLabel" Content="Name" HorizontalAlignment="Left" Margin="38,43,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
