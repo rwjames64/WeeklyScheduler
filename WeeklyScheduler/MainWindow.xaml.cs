@@ -35,6 +35,11 @@ namespace WeeklyScheduler
         {
             NewTaskDialog dialog = new WeeklyScheduler.NewTaskDialog();
             dialog.ShowDialog();
+
+            if (!dialog.cancelled)
+            {
+
+            }
         }
     }
 }

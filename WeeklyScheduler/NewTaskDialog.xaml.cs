@@ -19,9 +19,18 @@ namespace WeeklyScheduler
     /// </summary>
     public partial class NewTaskDialog : Window
     {
+        public bool cancelled { get; private set; }
+
         public NewTaskDialog()
         {
             InitializeComponent();
+
+            cancelled = true;
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
