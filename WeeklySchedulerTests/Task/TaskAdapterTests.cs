@@ -61,11 +61,8 @@ namespace WeeklySchedulerTests.Task
         public void TestAddGetRemoveTask()
         {
             TaskAdapter adapter = TaskAdapter.GetInstance();
-            WeeklyScheduler.Task.Task task1 = new WeeklyScheduler.Task.Task();
+            WeeklyScheduler.Task.Task task1 = new WeeklyScheduler.Task.Task("title", "description");
             WeeklyScheduler.Task.Task task2;
-
-            task1.Title = "title";
-            task1.Description = "description";
 
             Assert.IsTrue(adapter.AddTask(task1), "Unable to add new task");
             task2 = adapter.GetTask(task1.Title);
@@ -80,10 +77,7 @@ namespace WeeklySchedulerTests.Task
         public void TestAddBlankTask()
         {
             TaskAdapter adapter = TaskAdapter.GetInstance();
-            WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task();
-
-            task.Title = "";
-            task.Description = "";
+            WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task("", "");
 
             Assert.IsFalse(adapter.AddTask(task), "Adding task with blank title did not fail as expected");
         }
@@ -92,10 +86,7 @@ namespace WeeklySchedulerTests.Task
         public void TestAddDuplicateTask()
         {
             TaskAdapter adapter = TaskAdapter.GetInstance();
-            WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task();
-
-            task.Title = "title";
-            task.Description = "description";
+            WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task("title", "description");
 
             Assert.IsTrue(adapter.AddTask(task), "Unable to add new task");
             Assert.IsFalse(adapter.AddTask(task), "Adding duplicate task did not fail as expected");
@@ -107,6 +98,36 @@ namespace WeeklySchedulerTests.Task
             TaskAdapter adapter = TaskAdapter.GetInstance();
 
             Assert.IsFalse(adapter.RemoveTask(""), "Removing a task not found in the database did not fail as expected");
+        }
+
+        [TestMethod]
+        public void TestTaskTitles()
+        {
+            TaskAdapter adapter = TaskAdapter.GetInstance();
+            WeeklyScheduler.Task.Task task1 = new WeeklyScheduler.Task.Task("one", "");
+            WeeklyScheduler.Task.Task task2 = new WeeklyScheduler.Task.Task("two", "");
+            WeeklyScheduler.Task.Task task3 = new WeeklyScheduler.Task.Task("three", "");
+
+            adapter.AddTask(task1);
+            adapter.AddTask(task2);
+            adapter.AddTask(task3);
+
+            List<string> titles = adapter.TaskTitles();
+
+            Assert.AreEqual(3, titles.Count);
+            Assert.AreEqual("one", titles[0]);
+            Assert.AreEqual("three", titles[1]);
+            Assert.AreEqual("two", titles[2]);
+
+            adapter.RemoveTask(task1.Title);
+            adapter.RemoveTask(task2.Title);
+            adapter.RemoveTask(task3.Title);
+        }
+
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            TaskAdapter.GetInstance().RemoveAllTasks();
         }
     }
 }

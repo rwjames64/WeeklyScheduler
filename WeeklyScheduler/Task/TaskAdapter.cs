@@ -73,6 +73,11 @@ namespace WeeklyScheduler.Task
             return addTask;
         }
 
+        public void RemoveAllTasks()
+        {
+            root.RemoveAll();
+        }
+
         /// <summary>
         /// Remove a Task from the database file.
         /// </summary>
@@ -106,9 +111,8 @@ namespace WeeklyScheduler.Task
 
             if (element != null)
             {
-                task = new WeeklyScheduler.Task.Task();
-                task.Title = element.GetAttribute("title");
-                task.Description = element.GetAttribute("description");
+                string description = element.GetAttribute("description");
+                task = new WeeklyScheduler.Task.Task(title, description);
             }
 
             return task;
@@ -118,9 +122,16 @@ namespace WeeklyScheduler.Task
         /// Returns a collection of all task titles in the database sorted alphabetically.
         /// </summary>
         /// <returns></returns>
-        public ICollection<string> TaskTitles()
+        public List<string> TaskTitles()
         {
-            SortedSet<string> titles = new SortedSet<string>();
+            List<string> titles = new List<string>();
+
+            foreach(XmlElement element in root.GetElementsByTagName("task"))
+            {
+                titles.Add(element.GetAttribute("title"));
+            }
+
+            titles.Sort();
             return titles;
         }
 

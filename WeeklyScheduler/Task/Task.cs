@@ -8,6 +8,12 @@ namespace WeeklyScheduler.Task
 {
     public class Task
     {
+        public Task(string title, string description)
+        {
+            Title = title;
+            Description = description;
+        }
+
         private string title;
         public string Title
         {
