@@ -41,8 +41,16 @@ namespace WeeklyScheduler
                 // TODO
                 Label label = new Label();
                 label.Content = dialog.titleTextBox.Text;
+                label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
                 TasksWrapPanel.Children.Add(label);
             }
+        }
+
+        private void TaskItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Label label = sender as Label;
+            DataObject dragData = new DataObject("myFormat", label.Content);
+            DragDrop.DoDragDrop(label, dragData, DragDropEffects.Move);
         }
     }
 }

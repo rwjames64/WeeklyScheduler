@@ -10,7 +10,7 @@
         <Label x:Name="titleLabel" Content="WEEKLY SCHEDULE" HorizontalAlignment="Center" Margin="227,28,238,0" VerticalAlignment="Top" FontSize="36"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Height="23" Margin="0,45,500,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SpellCheck.IsEnabled="True"/>
         <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="500,45,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="listView" HorizontalAlignment="Center" Margin="10,90,0,150" Width="707" AllowDrop="True">
+        <ListView x:Name="WeekListView" HorizontalAlignment="Center" Margin="10,90,0,150" Width="707" AllowDrop="True">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Sunday" Width="100"/>
