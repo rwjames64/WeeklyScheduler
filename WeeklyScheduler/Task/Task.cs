@@ -20,5 +20,18 @@ namespace WeeklyScheduler.Task
                 Title = value.Trim();
             }
         }
+
+        public string Description
+        {
+            get
+            {
+                return Description;
+            }
+
+            set
+            {
+                Description = value.Trim();
+            }
+        }
     }
 }
