@@ -10,7 +10,7 @@
         <Label x:Name="titleLabel" Content="WEEKLY SCHEDULE" HorizontalAlignment="Center" Margin="227,28,238,0" VerticalAlignment="Top" FontSize="36"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Height="23" Margin="0,45,500,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SpellCheck.IsEnabled="True"/>
         <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="500,45,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="listView" HorizontalAlignment="Center" Margin="10,90,0,150" Width="707">
+        <ListView x:Name="listView" HorizontalAlignment="Center" Margin="10,90,0,150" Width="707" AllowDrop="True">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Sunday" Width="100"/>
@@ -34,6 +34,7 @@
         <Button x:Name="newScheduleButton" Content="New Schedule" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="newScheduleButton_Click"/>
         <Label x:Name="nameLabel" Content="Name" HorizontalAlignment="Left" Margin="38,43,0,0" VerticalAlignment="Top"/>
         <Button x:Name="newTaskButton" Content="New Task" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" Width="75" Click="newTaskButton_Click"/>
+        <WrapPanel x:Name="TasksWrapPanel" Height="75" Margin="90,0,32,10" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>

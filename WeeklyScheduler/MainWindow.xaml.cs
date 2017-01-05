@@ -38,7 +38,10 @@ namespace WeeklyScheduler
 
             if (!dialog.cancelled)
             {
-
+                // TODO
+                Label label = new Label();
+                label.Content = dialog.titleTextBox.Text;
+                TasksWrapPanel.Children.Add(label);
             }
         }
     }

@@ -32,5 +32,14 @@ namespace WeeklyScheduler
         {
             this.Close();
         }
+
+        private void okButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (titleTextBox.Text != "")
+            {
+                cancelled = false;
+                this.Close();
+            }
+        }
     }
 }
