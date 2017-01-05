@@ -6,31 +6,33 @@ using System.Threading.Tasks;
 
 namespace WeeklyScheduler.Task
 {
-    class Task
+    public class Task
     {
+        private string title;
         public string Title
         {
             get
             {
-                return Title;
+                return title;
             }
 
             set
             {
-                Title = value.Trim();
+                title = value.Trim();
             }
         }
 
+        private string description;
         public string Description
         {
             get
             {
-                return Description;
+                return description;
             }
 
             set
             {
-                Description = value.Trim();
+                description = value.Trim();
             }
         }
     }

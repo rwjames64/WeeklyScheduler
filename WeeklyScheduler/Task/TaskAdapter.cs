@@ -9,7 +9,7 @@ namespace WeeklyScheduler.Task
     /// <summary>
     /// Adapter class for storing and reading data from the Tasks database file.
     /// </summary>
-    class TaskAdapter
+    public class TaskAdapter
     {
         private static TaskAdapter instance;
 
