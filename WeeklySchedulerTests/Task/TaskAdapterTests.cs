@@ -70,7 +70,8 @@ namespace WeeklySchedulerTests.Task
             Assert.IsTrue(adapter.AddTask(task1), "Unable to add new task");
             task2 = adapter.GetTask(task1.Title);
             Assert.IsNotNull(task2, "Unable to get added task");
-            Assert.AreEqual(task2, task1, "GetTask did not return the proper task");
+            Assert.AreEqual(task2.Title, task1.Title, "GetTask did not return the proper task");
+            Assert.AreEqual(task2.Description, task1.Description, "GetTask did not return the proper task");
             Assert.IsTrue(adapter.RemoveTask("title"), "Unable to remove task");
             Assert.IsNull(adapter.GetTask("title"), "Task was not removed properly");
         }

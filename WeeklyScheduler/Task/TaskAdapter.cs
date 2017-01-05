@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace WeeklyScheduler.Task
 {
@@ -11,11 +12,32 @@ namespace WeeklyScheduler.Task
     /// </summary>
     public class TaskAdapter
     {
+        private static readonly string DIRECTORY_NAME = "data";
+        private static readonly string FILE_NAME = DIRECTORY_NAME + "\\tasks.xml";
+        private static readonly string INIT_XML = "<?xml version='1.0' ?><tasks></tasks>";
+
         private static TaskAdapter instance;
+
+        private XmlDocument document;
+        private XmlElement root;
+        private SortedSet<string> titleSet;
 
         private TaskAdapter()
         {
-            // TODO
+            document = new XmlDocument();
+
+            if (!System.IO.File.Exists(FILE_NAME))
+            {
+                document.LoadXml(INIT_XML);
+                System.IO.Directory.CreateDirectory(DIRECTORY_NAME);
+                document.Save(FILE_NAME);
+            }
+            else
+            {
+                document.Load(FILE_NAME);
+            }
+
+            root = document.DocumentElement;
         }
 
         public static TaskAdapter GetInstance()
@@ -35,7 +57,20 @@ namespace WeeklyScheduler.Task
         /// <returns>bool indicating if the addition was successful</returns>
         public bool AddTask(Task task)
         {
-            return false;
+            bool addTask = false;
+
+            if (GetElementWithTitle(task.Title) == null && task.Title != null && task.Title != "")
+            {
+                XmlElement taskElement = document.CreateElement("task");
+                taskElement.SetAttribute("title", task.Title);
+                taskElement.SetAttribute("description", task.Description);
+                root.AppendChild(taskElement);
+
+                document.Save(FILE_NAME);
+                addTask = true;
+            }
+
+            return addTask;
         }
 
         /// <summary>
@@ -45,7 +80,18 @@ namespace WeeklyScheduler.Task
         /// <returns>bool indicating if the removal was successful</returns>
         public bool RemoveTask(string title)
         {
-            return false;
+            bool removed = false;
+            XmlElement element = GetElementWithTitle(title);
+
+            if (element != null)
+            {
+                root.RemoveChild(element);
+
+                document.Save(FILE_NAME);
+                removed = true;
+            }
+
+            return removed;
         }
 
         /// <summary>
@@ -55,7 +101,17 @@ namespace WeeklyScheduler.Task
         /// <returns></returns>
         public Task GetTask(string title)
         {
-            return null;
+            Task task = null;
+            XmlElement element = GetElementWithTitle(title);
+
+            if (element != null)
+            {
+                task = new WeeklyScheduler.Task.Task();
+                task.Title = element.GetAttribute("title");
+                task.Description = element.GetAttribute("description");
+            }
+
+            return task;
         }
 
         /// <summary>
@@ -66,6 +122,21 @@ namespace WeeklyScheduler.Task
         {
             SortedSet<string> titles = new SortedSet<string>();
             return titles;
+        }
+
+        private XmlElement GetElementWithTitle(string title)
+        {
+            XmlElement element = null;
+
+            foreach (XmlElement e in root.GetElementsByTagName("task"))
+            {
+                if (e.GetAttribute("title") == title)
+                {
+                    element = e;
+                }
+            }
+
+            return element;
         }
     }
 }
