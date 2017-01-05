@@ -42,7 +42,26 @@ namespace WeeklyScheduler
                 Label label = new Label();
                 label.Content = dialog.titleTextBox.Text;
                 label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
-                TasksWrapPanel.Children.Add(label);
+
+                int i = 0;
+                bool added = false;
+
+                while (i < TasksWrapPanel.Children.Count && !added)
+                {
+                    Label child = TasksWrapPanel.Children[i] as Label;
+
+                    if (label.Content.ToString().CompareTo(child.Content.ToString()) < 0)
+                    {
+                        TasksWrapPanel.Children.Insert(i, label);
+                        added = true;
+                    }
+                    i++;
+                }
+
+                if (!added)
+                {
+                    TasksWrapPanel.Children.Add(label);
+                }
             }
         }
 
