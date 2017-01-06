@@ -22,6 +22,12 @@ namespace WeeklyScheduler
     /// </summary>
     public partial class MainWindow : Window
     {
+        private class ScheduledTaskTag
+        {
+            public TextBlock textBlock;
+            public StackPanel dayPanel;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -75,14 +81,27 @@ namespace WeeklyScheduler
 
         private void AddTaskToDay(string taskTitle, StackPanel dayPanel, int hour, int minute, string amPm)
         {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem removeMenuItem = new MenuItem();
             WeeklyScheduler.Task.Task task = TaskAdapter.GetInstance().GetTask(taskTitle);
             TextBlock textBlock = new TextBlock();
+            ScheduledTaskTag tag = new ScheduledTaskTag();
+
+            tag.dayPanel = dayPanel;
+            tag.textBlock = textBlock;
+
+            removeMenuItem.Header = "Remove";
+            removeMenuItem.Tag = tag;
+            removeMenuItem.Click += new RoutedEventHandler(ScheduledTaskItem_RemoveClicked);
+            contextMenu.Items.Add(removeMenuItem);
+
             string hourAndMinute = hour.ToString("00") + ":" + minute.ToString("00");
 
             textBlock.Text = hourAndMinute + " " + amPm + "\n" +
                 task.Title + "\n" +
                 task.Description;
 
+            textBlock.ContextMenu = contextMenu;
             textBlock.Margin = new Thickness(0, 0, 0, 5);
             textBlock.TextWrapping = TextWrapping.Wrap;
             textBlock.Tag = amPm + hourAndMinute;
@@ -162,6 +181,19 @@ namespace WeeklyScheduler
             {
                 TaskAdapter.GetInstance().RemoveTask(title);
                 RemoveTaskTitleFromTasksWrapPanel(title);
+            }
+        }
+
+        private void ScheduledTaskItem_RemoveClicked(object sender, RoutedEventArgs e)
+        {
+            string title = (sender as MenuItem).Tag as string;
+            ConfirmationDialog dialog = new UI.ConfirmationDialog("Confirm Remove", "Are you sure you want to remove task from schedule?");
+            dialog.ShowDialog();
+
+            if (!dialog.Cancelled)
+            {
+                ScheduledTaskTag tag = (sender as MenuItem).Tag as ScheduledTaskTag;
+                tag.dayPanel.Children.Remove(tag.textBlock);
             }
         }
 
