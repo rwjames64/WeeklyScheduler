@@ -136,5 +136,11 @@ namespace WeeklyScheduler
                 RemoveTaskTitleFromTasksWrapPanel(title);
             }
         }
+
+        private void TaskItem_Drop(object sender, DragEventArgs e)
+        {
+            TimeSelectDialog dialog = new TimeSelectDialog();
+            dialog.ShowDialog();
+        }
     }
 }

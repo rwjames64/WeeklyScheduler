@@ -27,7 +27,7 @@
             </ScrollViewer>
         </Border>
         <Border x:Name="WednesdayGrid" BorderBrush="Black" BorderThickness="1" Margin="0,112,0,146" Width="100" HorizontalAlignment="Center">
-            <StackPanel x:Name="WednesdayPanel" AllowDrop="True"/>
+            <StackPanel x:Name="WednesdayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Wednesday" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
 
