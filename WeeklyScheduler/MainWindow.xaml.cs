@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WeeklyScheduler.Task;
+using WeeklyScheduler.UI;
 
 namespace WeeklyScheduler
 {
@@ -42,6 +43,7 @@ namespace WeeklyScheduler
             ContextMenu contextMenu = new ContextMenu();
             MenuItem deleteMenuItem = new MenuItem();
             deleteMenuItem.Header = "Delete";
+            deleteMenuItem.Tag = title;
             deleteMenuItem.Click += new RoutedEventHandler(TaskItem_DeleteClicked);
             contextMenu.Items.Add(deleteMenuItem);
             Label label = new Label();
@@ -67,6 +69,24 @@ namespace WeeklyScheduler
             }
 
             TasksWrapPanel.Children.Insert(index, label);
+        }
+
+        private void RemoveTaskTitleFromTasksWrapPanel(string title)
+        {
+            Label label = null;
+
+            foreach (Label child in TasksWrapPanel.Children)
+            {
+                if (child.Content.ToString() == title)
+                {
+                    label = child;
+                }
+            }
+
+            if (label != null)
+            {
+                TasksWrapPanel.Children.Remove(label);
+            }
         }
 
         private void newScheduleButton_Click(object sender, RoutedEventArgs e)
@@ -99,7 +119,15 @@ namespace WeeklyScheduler
 
         private void TaskItem_DeleteClicked(object sender, RoutedEventArgs e)
         {
-            Label label = sender as Label;
+            string title = (sender as MenuItem).Tag as string;
+            ConfirmationDialog dialog = new UI.ConfirmationDialog("Confirm Delete", "Are you sure you want to delete task '" + title + "'?");
+            dialog.ShowDialog();
+
+            if (!dialog.Cancelled)
+            {
+                TaskAdapter.GetInstance().RemoveTask(title);
+                RemoveTaskTitleFromTasksWrapPanel(title);
+            }
         }
     }
 }
