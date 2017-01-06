@@ -43,25 +43,24 @@ namespace WeeklyScheduler
             label.Content = title;
             label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
 
-            int i = 0;
-            bool added = false;
+            int index = 0;
+            bool found = false;
 
-            while (i < TasksWrapPanel.Children.Count && !added)
+            while (index < TasksWrapPanel.Children.Count && !found)
             {
-                Label child = TasksWrapPanel.Children[i] as Label;
+                Label child = TasksWrapPanel.Children[index] as Label;
 
                 if (label.Content.ToString().CompareTo(child.Content.ToString()) < 0)
                 {
-                    TasksWrapPanel.Children.Insert(i, label);
-                    added = true;
+                    found = true;
                 }
-                i++;
+                else
+                {
+                    index++;
+                }
             }
 
-            if (!added)
-            {
-                TasksWrapPanel.Children.Add(label);
-            }
+            TasksWrapPanel.Children.Insert(index, label);
         }
 
         private void newScheduleButton_Click(object sender, RoutedEventArgs e)
