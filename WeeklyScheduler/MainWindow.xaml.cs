@@ -39,9 +39,15 @@ namespace WeeklyScheduler
 
         private void AddTaskTitleToTasksWrapPanel(string title)
         {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem deleteMenuItem = new MenuItem();
+            deleteMenuItem.Header = "Delete";
+            deleteMenuItem.Click += new RoutedEventHandler(TaskItem_DeleteClicked);
+            contextMenu.Items.Add(deleteMenuItem);
             Label label = new Label();
             label.Content = title;
             label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
+            label.ContextMenu = contextMenu;
 
             int index = 0;
             bool found = false;
@@ -89,6 +95,11 @@ namespace WeeklyScheduler
             Label label = sender as Label;
             DataObject dragData = new DataObject("myFormat", label.Content);
             DragDrop.DoDragDrop(label, dragData, DragDropEffects.Move);
+        }
+
+        private void TaskItem_DeleteClicked(object sender, RoutedEventArgs e)
+        {
+            Label label = sender as Label;
         }
     }
 }
