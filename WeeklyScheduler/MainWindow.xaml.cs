@@ -147,6 +147,13 @@ namespace WeeklyScheduler
         {
             nameTextBox.Clear();
             startDatePicker.SelectedDate = null;
+            SundayPanel.Children.Clear();
+            MondayPanel.Children.Clear();
+            TuesdayPanel.Children.Clear();
+            WednesdayPanel.Children.Clear();
+            ThursdayPanel.Children.Clear();
+            FridayPanel.Children.Clear();
+            SaturdayPanel.Children.Clear();
         }
 
         private void newTaskButton_Click(object sender, RoutedEventArgs e)
