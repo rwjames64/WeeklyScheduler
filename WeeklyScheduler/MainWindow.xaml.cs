@@ -47,8 +47,10 @@ namespace WeeklyScheduler
             deleteMenuItem.Click += new RoutedEventHandler(TaskItem_DeleteClicked);
             contextMenu.Items.Add(deleteMenuItem);
             Label label = new Label();
+            label.Background = Brushes.LightGray;
             label.Content = title;
             label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
+            label.Margin = new Thickness(5, 5, 0, 0);
             label.ContextMenu = contextMenu;
 
             int index = 0;

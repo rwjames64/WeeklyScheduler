@@ -35,7 +35,9 @@
         <Label x:Name="nameLabel" Content="Name" HorizontalAlignment="Center" Margin="34,45,705,0" VerticalAlignment="Top" RenderTransformOrigin="-0.881,0.423"/>
         <Button x:Name="newTaskButton" Content="New Task" HorizontalAlignment="Left" Margin="10,0,0,60" VerticalAlignment="Bottom" Width="75" Click="newTaskButton_Click"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="70" Margin="90,0,10,10" VerticalAlignment="Bottom">
-            <WrapPanel x:Name="TasksWrapPanel" Margin="0"/>
+            <ScrollViewer>
+                <WrapPanel x:Name="TasksWrapPanel" Margin="0"/>
+            </ScrollViewer>
         </Border>
 
     </Grid>
