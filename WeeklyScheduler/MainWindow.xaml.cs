@@ -73,7 +73,7 @@ namespace WeeklyScheduler
             TasksWrapPanel.Children.Insert(index, label);
         }
 
-        private void AddTaskToDay(string title)
+        private void AddTaskToDay(string taskTitle, StackPanel dayPanel)
         {
             
         }
@@ -120,7 +120,7 @@ namespace WeeklyScheduler
         private void TaskItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Label label = sender as Label;
-            DataObject dragData = new DataObject("myFormat", label.Content);
+            DataObject dragData = new DataObject("title", label.Content.ToString());
             DragDrop.DoDragDrop(label, dragData, DragDropEffects.Move);
         }
 
@@ -141,6 +141,13 @@ namespace WeeklyScheduler
         {
             TimeSelectDialog dialog = new TimeSelectDialog();
             dialog.ShowDialog();
+
+            if (!dialog.Cancelled)
+            {
+                string title = e.Data.GetData("title") as string;
+                StackPanel dayPanel = sender as StackPanel;
+                AddTaskToDay(title, dayPanel);
+            }
         }
     }
 }
