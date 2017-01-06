@@ -73,6 +73,11 @@ namespace WeeklyScheduler
             TasksWrapPanel.Children.Insert(index, label);
         }
 
+        private void AddTaskToDay(string title)
+        {
+            
+        }
+
         private void RemoveTaskTitleFromTasksWrapPanel(string title)
         {
             Label label = null;

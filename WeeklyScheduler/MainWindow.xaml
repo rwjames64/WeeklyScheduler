@@ -10,19 +10,6 @@
         <Label x:Name="titleLabel" Content="WEEKLY SCHEDULE" HorizontalAlignment="Center" Margin="227,28,238,0" VerticalAlignment="Top" FontSize="36"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Height="23" Margin="0,45,500,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SpellCheck.IsEnabled="True"/>
         <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="500,45,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="WeekListView" HorizontalAlignment="Center" Margin="10,90,0,150" Width="707" AllowDrop="True">
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="Sunday" Width="100"/>
-                    <GridViewColumn Header="Monday" Width="100"/>
-                    <GridViewColumn Header="Tuesday" Width="100"/>
-                    <GridViewColumn Header="Wednesday" Width="100"/>
-                    <GridViewColumn Header="Thursday" Width="100"/>
-                    <GridViewColumn Header="Friday" Width="100"/>
-                    <GridViewColumn Header="Saturday" Width="100"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Label x:Name="managerLabel" Content="Manager" HorizontalAlignment="Center" Margin="0,0,600,120" VerticalAlignment="Bottom"/>
         <Label x:Name="supervisorLabel1" Content="Supervisor" HorizontalAlignment="Center" Margin="90,0,0,120" VerticalAlignment="Bottom"/>
         <Label x:Name="supervisorLabel2" Content="Supervisor" HorizontalAlignment="Center" Margin="0,0,600,90" VerticalAlignment="Bottom"/>
@@ -39,6 +26,10 @@
                 <WrapPanel x:Name="TasksWrapPanel" Margin="0"/>
             </ScrollViewer>
         </Border>
+        <Border x:Name="WednesdayGrid" BorderBrush="Black" BorderThickness="1" Margin="0,112,0,146" Width="100" HorizontalAlignment="Center">
+            <StackPanel x:Name="WednesdayPanel" AllowDrop="True"/>
+        </Border>
+        <Label Content="Wednesday" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
