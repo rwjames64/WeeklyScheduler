@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeeklyScheduler.Task;
 
 namespace WeeklyScheduler
 {
@@ -23,6 +24,44 @@ namespace WeeklyScheduler
         public MainWindow()
         {
             InitializeComponent();
+            InitializeTasks();
+        }
+
+        private void InitializeTasks()
+        {
+            List<string> tasksList = TaskAdapter.GetInstance().TaskTitles();
+
+            foreach (string title in tasksList)
+            {
+                AddTaskTitleToTasksWrapPanel(title);
+            }
+        }
+
+        private void AddTaskTitleToTasksWrapPanel(string title)
+        {
+            Label label = new Label();
+            label.Content = title;
+            label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
+
+            int i = 0;
+            bool added = false;
+
+            while (i < TasksWrapPanel.Children.Count && !added)
+            {
+                Label child = TasksWrapPanel.Children[i] as Label;
+
+                if (label.Content.ToString().CompareTo(child.Content.ToString()) < 0)
+                {
+                    TasksWrapPanel.Children.Insert(i, label);
+                    added = true;
+                }
+                i++;
+            }
+
+            if (!added)
+            {
+                TasksWrapPanel.Children.Add(label);
+            }
         }
 
         private void newScheduleButton_Click(object sender, RoutedEventArgs e)
@@ -38,29 +77,10 @@ namespace WeeklyScheduler
 
             if (!dialog.cancelled)
             {
-                // TODO
-                Label label = new Label();
-                label.Content = dialog.titleTextBox.Text;
-                label.MouseLeftButtonDown += new MouseButtonEventHandler(TaskItem_MouseLeftButtonDown);
-
-                int i = 0;
-                bool added = false;
-
-                while (i < TasksWrapPanel.Children.Count && !added)
+                WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task(dialog.titleTextBox.Text, dialog.descriptionTextBox.Text);
+                if (TaskAdapter.GetInstance().AddTask(task))
                 {
-                    Label child = TasksWrapPanel.Children[i] as Label;
-
-                    if (label.Content.ToString().CompareTo(child.Content.ToString()) < 0)
-                    {
-                        TasksWrapPanel.Children.Insert(i, label);
-                        added = true;
-                    }
-                    i++;
-                }
-
-                if (!added)
-                {
-                    TasksWrapPanel.Children.Add(label);
+                    AddTaskTitleToTasksWrapPanel(task.Title);
                 }
             }
         }

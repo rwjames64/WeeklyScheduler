@@ -115,9 +115,6 @@ namespace WeeklySchedulerTests.Task
             List<string> titles = adapter.TaskTitles();
 
             Assert.AreEqual(3, titles.Count);
-            Assert.AreEqual("one", titles[0]);
-            Assert.AreEqual("three", titles[1]);
-            Assert.AreEqual("two", titles[2]);
 
             adapter.RemoveTask(task1.Title);
             adapter.RemoveTask(task2.Title);

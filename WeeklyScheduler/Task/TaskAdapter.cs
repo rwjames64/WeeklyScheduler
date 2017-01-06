@@ -119,7 +119,7 @@ namespace WeeklyScheduler.Task
         }
 
         /// <summary>
-        /// Returns a collection of all task titles in the database sorted alphabetically.
+        /// Returns a collection of all task titles in the database.
         /// </summary>
         /// <returns></returns>
         public List<string> TaskTitles()
@@ -131,7 +131,6 @@ namespace WeeklyScheduler.Task
                 titles.Add(element.GetAttribute("title"));
             }
 
-            titles.Sort();
             return titles;
         }
 
