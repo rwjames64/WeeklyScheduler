@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeeklyScheduler.UI"
         mc:Ignorable="d"
-        Title="Select Time" Height="138.655" Width="201.681">
+        Title="Select Time" Height="138.655" Width="201.681" ResizeMode="NoResize">
     <Grid Margin="0">
         <ComboBox x:Name="hourComboBox" HorizontalAlignment="Left" Margin="19,17,0,0" VerticalAlignment="Top" Width="45" SelectedIndex="0">
             <ComboBoxItem Content="1"/>
