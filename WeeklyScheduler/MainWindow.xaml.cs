@@ -73,9 +73,37 @@ namespace WeeklyScheduler
             TasksWrapPanel.Children.Insert(index, label);
         }
 
-        private void AddTaskToDay(string taskTitle, StackPanel dayPanel)
+        private void AddTaskToDay(string taskTitle, StackPanel dayPanel, int hour, int minute, string amPm)
         {
-            
+            WeeklyScheduler.Task.Task task = TaskAdapter.GetInstance().GetTask(taskTitle);
+            TextBlock textBlock = new TextBlock();
+            string hourAndMinute = hour.ToString("00") + ":" + minute.ToString("00");
+
+            textBlock.Text = hourAndMinute + " " + amPm + "\n" +
+                task.Title + "\n" +
+                task.Description;
+
+            textBlock.Margin = new Thickness(0, 0, 0, 5);
+            textBlock.TextWrapping = TextWrapping.Wrap;
+            textBlock.Tag = amPm + hourAndMinute;
+
+            bool indexFound = false;
+            int index = 0;
+
+            while (!indexFound && index < dayPanel.Children.Count)
+            {
+                TextBlock child = dayPanel.Children[index] as TextBlock;
+                if ((textBlock.Tag as string).CompareTo(child.Tag as string) < 0)
+                {
+                    indexFound = true;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            dayPanel.Children.Insert(index, textBlock);
         }
 
         private void RemoveTaskTitleFromTasksWrapPanel(string title)
@@ -146,7 +174,10 @@ namespace WeeklyScheduler
             {
                 string title = e.Data.GetData("title") as string;
                 StackPanel dayPanel = sender as StackPanel;
-                AddTaskToDay(title, dayPanel);
+                int hour = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.hourComboBox.SelectedIndex+1);
+                int minute = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.minuteComboBox.SelectedIndex*15);
+                string amPm = (dialog.noTimeCheckBox.IsChecked == true ? "" : (dialog.amPmComboBox.SelectedItem as ComboBoxItem).Content.ToString());
+                AddTaskToDay(title, dayPanel, hour, minute, amPm);
             }
         }
     }
