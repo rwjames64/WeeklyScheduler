@@ -10,47 +10,47 @@
         <Label x:Name="titleLabel" Content="WEEKLY SCHEDULE" HorizontalAlignment="Center" Margin="227,28,238,0" VerticalAlignment="Top" FontSize="36"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Height="23" Margin="0,45,500,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" SpellCheck.IsEnabled="True"/>
         <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="500,45,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="managerLabel" Content="Manager" HorizontalAlignment="Center" Margin="0,0,600,120" VerticalAlignment="Bottom"/>
-        <Label x:Name="supervisorLabel1" Content="Supervisor" HorizontalAlignment="Center" Margin="90,0,0,120" VerticalAlignment="Bottom"/>
-        <Label x:Name="supervisorLabel2" Content="Supervisor" HorizontalAlignment="Center" Margin="0,0,600,90" VerticalAlignment="Bottom"/>
-        <Label x:Name="employeeLabel" Content="Employee" HorizontalAlignment="Center" Margin="90,0,0,90" VerticalAlignment="Bottom"/>
-        <Separator HorizontalAlignment="Center" Height="1" Margin="0,0,260,120" VerticalAlignment="Bottom" Width="280"/>
-        <Separator HorizontalAlignment="Center" Height="1" Margin="430,0,0,120" VerticalAlignment="Bottom" Width="280"/>
-        <Separator HorizontalAlignment="Center" Height="1" Margin="430,0,0,90" VerticalAlignment="Bottom" Width="280"/>
-        <Separator HorizontalAlignment="Center" Height="1" Margin="0,0,260,90" VerticalAlignment="Bottom" Width="280"/>
+        <Label x:Name="managerLabel" Content="Manager" HorizontalAlignment="Center" Margin="0,0,600,170" VerticalAlignment="Bottom"/>
+        <Label x:Name="supervisorLabel1" Content="Supervisor" HorizontalAlignment="Center" Margin="90,0,0,170" VerticalAlignment="Bottom"/>
+        <Label x:Name="supervisorLabel2" Content="Supervisor" HorizontalAlignment="Center" Margin="0,0,600,140" VerticalAlignment="Bottom"/>
+        <Label x:Name="employeeLabel" Content="Employee" HorizontalAlignment="Center" Margin="90,0,0,140" VerticalAlignment="Bottom"/>
+        <Separator HorizontalAlignment="Center" Height="1" Margin="0,0,260,170" VerticalAlignment="Bottom" Width="280"/>
+        <Separator HorizontalAlignment="Center" Height="1" Margin="430,0,0,170" VerticalAlignment="Bottom" Width="280"/>
+        <Separator HorizontalAlignment="Center" Height="1" Margin="430,0,0,140" VerticalAlignment="Bottom" Width="280"/>
+        <Separator HorizontalAlignment="Center" Height="1" Margin="0,0,260,140" VerticalAlignment="Bottom" Width="280"/>
         <Button x:Name="newScheduleButton" Content="New Schedule" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="newScheduleButton_Click"/>
         <Label x:Name="nameLabel" Content="Name" HorizontalAlignment="Center" Margin="34,45,705,0" VerticalAlignment="Top" RenderTransformOrigin="-0.881,0.423"/>
-        <Button x:Name="newTaskButton" Content="New Task" HorizontalAlignment="Left" Margin="10,0,0,60" VerticalAlignment="Bottom" Width="75" Click="newTaskButton_Click"/>
-        <Border BorderBrush="Black" BorderThickness="1" Height="70" Margin="90,0,10,10" VerticalAlignment="Bottom">
+        <Button x:Name="newTaskButton" Content="New Task" HorizontalAlignment="Left" Margin="10,0,0,110" VerticalAlignment="Bottom" Width="75" Click="newTaskButton_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1" Height="120 " Margin="90,0,10,10" VerticalAlignment="Bottom">
             <ScrollViewer>
                 <WrapPanel x:Name="TasksWrapPanel" Margin="0"/>
             </ScrollViewer>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="0,112,0,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,112,0,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="WednesdayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Wednesday" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="448,112,244,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="448,112,244,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="ThursdayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Thursday" HorizontalAlignment="Center" Margin="463,86,259,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="244,112,448,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="244,112,448,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="TuesdayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Tuesday" HorizontalAlignment="Center" Margin="259,86,463,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="551,112,141,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="551,112,141,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="FridayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Friday" HorizontalAlignment="Center" Margin="566,86,156,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="141,112,551,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="141,112,551,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="MondayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Monday" HorizontalAlignment="Center" Margin="156,86,566,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="38,112,654,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="38,112,654,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="SundayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Sunday" HorizontalAlignment="Center" Margin="52,86,670,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="654,112,38,146" Width="100" HorizontalAlignment="Center">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="654,112,38,196" Width="100" HorizontalAlignment="Center">
             <StackPanel x:Name="SaturdayPanel" Drop="TaskItem_Drop" AllowDrop="True" Background="#00000000"/>
         </Border>
         <Label Content="Saturday" HorizontalAlignment="Center" Margin="668,86,53,0" VerticalAlignment="Top"/>
