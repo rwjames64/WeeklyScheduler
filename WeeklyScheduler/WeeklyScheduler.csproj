@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Export\HTMLBuilder.cs" />
     <Compile Include="Task\Task.cs" />
     <Compile Include="Task\TaskAdapter.cs" />
     <Compile Include="UI\ConfirmationDialog.xaml.cs">

@@ -219,5 +219,16 @@ namespace WeeklyScheduler
                 AddTaskToDay(title, dayPanel, hour, minute, amPm);
             }
         }
+
+        private void exportButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime? date = startDatePicker.SelectedDate;
+            string name = nameTextBox.Text.Trim();
+            if (date != null && name != "")
+            {
+                string html = Export.HTMLBuilder.GenerateHTML(name, date.Value);
+                Console.WriteLine(html);
+            }
+        }
     }
 }
