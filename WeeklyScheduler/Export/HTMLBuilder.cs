@@ -35,6 +35,68 @@ namespace WeeklyScheduler.Export
 
             css.Append("<DOCTYPE html>");
             css.Append("<style>");
+
+            // body styles
+            css.Append("body { ");
+            css.Append("max-width: 1100px; ");
+            css.Append("margin: 0 auto; ");
+            css.Append("} ");
+
+            // Header styles
+            css.Append("#Header { ");
+            css.Append("margin: 2em; ");
+            css.Append("text-align: center; ");
+            css.Append("} ");
+
+            css.Append("#Header span { ");
+            css.Append("margin: 0 1.5em; ");
+            css.Append("} ");
+
+            css.Append("#Header .title { ");
+            css.Append("font-size: 2em; ");
+            css.Append("} ");
+
+            // Content styles
+            css.Append(".border { ");
+            css.Append("border: 1px solid black; ");
+            css.Append("height: 500px; ");
+            css.Append("text-align: left; ");
+            css.Append("} ");
+
+            css.Append(".day { ");
+            css.Append("float: left; ");
+            css.Append("margin: 5px; ");
+            css.Append("text-align: center; ");
+            css.Append("width: 147px; ");
+            css.Append("} ");
+
+            css.Append(".scheduledTask { ");
+            css.Append("margin: 0.5em; ");
+            css.Append("} ");
+
+            css.Append("p { ");
+            css.Append("margin: 0; ");
+            css.Append("} ");
+
+            // Footer styles
+            css.Append("#Footer hr { ");
+            css.Append("border-color: black; ");
+            css.Append("border-style: solid; ");
+            css.Append("border-top: 0; ");
+            css.Append("display: inline-block; ");
+            css.Append("margin-top: 30px; ");
+            css.Append("position: relative; ");
+            css.Append("top: 1em; ");
+            css.Append("width: 460px; ");
+            css.Append("} ");
+
+            css.Append("#Footer span { ");
+            css.Append("display: inline-block; ");
+            css.Append("padding-right: 0.2em; ");
+            css.Append("text-align: right; ");
+            css.Append("width: 80px; ");
+            css.Append("} ");
+
             css.Append("</style>");
 
             return css.ToString();
@@ -88,16 +150,16 @@ namespace WeeklyScheduler.Export
             day.Append("<div class=\"day\">");
             day.Append(name);
             day.Append("<div class=\"border\">");
-            day.Append("<div class=\"scheduledTask\">");
             
             foreach (ScheduledTask task in tasks)
             {
+                day.Append("<div class=\"scheduledTask\">");
                 day.Append("<p>" + task.Time + "</p>");
                 day.Append("<p>" + task.Title + "</p>");
                 day.Append("<p>" + task.Description + "</p>");
+                day.Append("</div>");
             }
 
-            day.Append("</div>");
             day.Append("</div>");
             day.Append("</div>");
 
@@ -109,10 +171,10 @@ namespace WeeklyScheduler.Export
             StringBuilder footer = new StringBuilder();
 
             footer.Append("<div id=\"Footer\">");
-            footer.Append("Manager").Append("<hr />");
-            footer.Append("Supervisor").Append("<hr />");
-            footer.Append("Supervisor").Append("<hr />");
-            footer.Append("Employee").Append("<hr />");
+            footer.Append("<span>Manager</span>").Append("<hr />");
+            footer.Append("<span>Supervisor</span>").Append("<hr />");
+            footer.Append("<span>Supervisor</span>").Append("<hr />");
+            footer.Append("<span>Employee</span>").Append("<hr />");
             footer.Append("</div>");
             footer.Append("</body></html>");
 

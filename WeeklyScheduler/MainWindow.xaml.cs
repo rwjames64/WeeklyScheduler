@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -228,7 +229,7 @@ namespace WeeklyScheduler
             {
                 string html = Export.HTMLBuilder.GenerateHTML(name, date.Value, generateListOfScheduledTasks());
                 Export.HTMLConverter.convertHTML("schedule.pdf", html);
-                Console.WriteLine(html);
+                Debug.WriteLine(html);
             }
         }
 
