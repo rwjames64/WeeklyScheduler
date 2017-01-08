@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -221,13 +222,40 @@ namespace WeeklyScheduler
 
         private void exportButton_Click(object sender, RoutedEventArgs e)
         {
-            DateTime? date = startDatePicker.SelectedDate;
+            DateTime? nullableDate = startDatePicker.SelectedDate;
             string name = nameTextBox.Text.Trim();
-            if (date != null && name != "")
+            if (nullableDate != null && name != "")
             {
-                string html = Export.HTMLBuilder.GenerateHTML(name, date.Value, generateListOfScheduledTasks());
-                Export.HTMLConverter.convertHTML("schedule.pdf", html);
-                Debug.WriteLine(html);
+                DateTime date = nullableDate.Value;
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.FileName = "schedule " + date.Year + date.Month.ToString("") + date.Day.ToString("");
+                dialog.DefaultExt = ".pdf";
+                dialog.Filter = "PDF Documents (.pdf)|*.pdf";
+                Nullable<bool> result = dialog.ShowDialog();
+
+                if (result == true)
+                {
+                    string html = Export.HTMLBuilder.GenerateHTML(name, date, generateListOfScheduledTasks());
+                    Export.HTMLConverter.convertHTML(dialog.FileName, html);
+                    Debug.WriteLine(html);
+
+                    Process.Start(@dialog.FileName);
+                }
+            }
+            else
+            {
+                string message = "The following information is missing:";
+
+                if (name == "")
+                {
+                    message += "\nName";
+                }
+                if (nullableDate == null)
+                {
+                    message += "\nStart Date";
+                }
+
+                MessageBox.Show(message, "Unable to export to PDF");
             }
         }
 
