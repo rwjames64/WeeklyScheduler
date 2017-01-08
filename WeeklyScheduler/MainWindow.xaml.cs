@@ -227,6 +227,7 @@ namespace WeeklyScheduler
             if (date != null && name != "")
             {
                 string html = Export.HTMLBuilder.GenerateHTML(name, date.Value);
+                Export.HTMLConverter.convertHTML("schedule.pdf", html);
                 Console.WriteLine(html);
             }
         }
