@@ -80,14 +80,11 @@ namespace WeeklyScheduler
             TasksWrapPanel.Children.Insert(index, label);
         }
 
-        private void AddTaskToDay(string taskTitle, StackPanel dayPanel, int hour, int minute, string amPm)
+        private void AddTaskToDay(ScheduledTask task, StackPanel dayPanel)
         {
-            string hourAndMinute = hour.ToString("00") + ":" + minute.ToString("00");
             ContextMenu contextMenu = new ContextMenu();
             MenuItem removeMenuItem = new MenuItem();
-            WeeklyScheduler.Task.Task task = TaskAdapter.GetInstance().GetTask(taskTitle);
             TextBlock textBlock = new TextBlock();
-            ScheduledTask scheduledTask = new ScheduledTask(taskTitle, task.Description, hourAndMinute + " " + amPm);
             ScheduledTaskTag tag = new ScheduledTaskTag();
 
             tag.dayPanel = dayPanel;
@@ -98,14 +95,14 @@ namespace WeeklyScheduler
             removeMenuItem.Click += new RoutedEventHandler(ScheduledTaskItem_RemoveClicked);
             contextMenu.Items.Add(removeMenuItem);
 
-            textBlock.Text = scheduledTask.Time + "\n" +
+            textBlock.Text = task.Time + "\n" +
                 task.Title + "\n" +
                 task.Description;
 
             textBlock.ContextMenu = contextMenu;
             textBlock.Margin = new Thickness(0, 0, 0, 5);
             textBlock.TextWrapping = TextWrapping.Wrap;
-            textBlock.Tag = scheduledTask;
+            textBlock.Tag = task;
 
             bool indexFound = false;
             int index = 0;
@@ -113,7 +110,7 @@ namespace WeeklyScheduler
             while (!indexFound && index < dayPanel.Children.Count)
             {
                 TextBlock child = dayPanel.Children[index] as TextBlock;
-                if ((textBlock.Tag as ScheduledTask).Time.CompareTo((child.Tag as ScheduledTask).Time) < 0)
+                if ((textBlock.Tag as ScheduledTask).CompareTo(child.Tag as ScheduledTask) < 0)
                 {
                     indexFound = true;
                 }
@@ -217,7 +214,8 @@ namespace WeeklyScheduler
                 int hour = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.hourComboBox.SelectedIndex+1);
                 int minute = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.minuteComboBox.SelectedIndex*15);
                 string amPm = (dialog.noTimeCheckBox.IsChecked == true ? "" : (dialog.amPmComboBox.SelectedItem as ComboBoxItem).Content.ToString());
-                AddTaskToDay(title, dayPanel, hour, minute, amPm);
+                ScheduledTask task = new ScheduledTask(title, TaskAdapter.GetInstance().GetTask(title).Description, hour, minute, amPm);
+                AddTaskToDay(task, dayPanel);
             }
         }
 

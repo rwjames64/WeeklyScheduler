@@ -6,13 +6,52 @@ using System.Threading.Tasks;
 
 namespace WeeklyScheduler.Task
 {
-    class ScheduledTask : Task
+    class ScheduledTask : Task, IComparable<ScheduledTask>
     {
-        public ScheduledTask(string title, string description, string time) : base(title, description)
+        private string amPm;
+        private int hour;
+        private int minute;
+
+        public ScheduledTask(string title, string description, int hour, int minute, string amPm) : base(title, description)
         {
-            Time = time;
+            this.amPm = amPm;
+            this.hour = hour;
+            this.minute = minute;
         }
 
-        public string Time { get; private set; }
+        public string Time
+        {
+            get
+            {
+                return hour.ToString("00") + ":" + minute.ToString("00") + " " + amPm;
+            }
+        }
+
+        public int CompareTo(ScheduledTask task)
+        {
+            int result = amPm.CompareTo(task.amPm);
+
+            if (result == 0)
+            {
+                result = hour - task.hour;
+            }
+
+            if (result == 0)
+            {
+                result = minute - task.minute;
+            }
+
+            if (result == 0)
+            {
+                result = Title.CompareTo(task.Title);
+            }
+
+            if (result == 0)
+            {
+                result = Description.CompareTo(task.Description);
+            }
+
+            return result;
+        }
     }
 }
