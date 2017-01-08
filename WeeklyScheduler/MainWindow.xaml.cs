@@ -81,10 +81,12 @@ namespace WeeklyScheduler
 
         private void AddTaskToDay(string taskTitle, StackPanel dayPanel, int hour, int minute, string amPm)
         {
+            string hourAndMinute = hour.ToString("00") + ":" + minute.ToString("00");
             ContextMenu contextMenu = new ContextMenu();
             MenuItem removeMenuItem = new MenuItem();
             WeeklyScheduler.Task.Task task = TaskAdapter.GetInstance().GetTask(taskTitle);
             TextBlock textBlock = new TextBlock();
+            ScheduledTask scheduledTask = new ScheduledTask(taskTitle, task.Description, hourAndMinute + " " + amPm);
             ScheduledTaskTag tag = new ScheduledTaskTag();
 
             tag.dayPanel = dayPanel;
@@ -95,16 +97,14 @@ namespace WeeklyScheduler
             removeMenuItem.Click += new RoutedEventHandler(ScheduledTaskItem_RemoveClicked);
             contextMenu.Items.Add(removeMenuItem);
 
-            string hourAndMinute = hour.ToString("00") + ":" + minute.ToString("00");
-
-            textBlock.Text = hourAndMinute + " " + amPm + "\n" +
+            textBlock.Text = scheduledTask.Time + "\n" +
                 task.Title + "\n" +
                 task.Description;
 
             textBlock.ContextMenu = contextMenu;
             textBlock.Margin = new Thickness(0, 0, 0, 5);
             textBlock.TextWrapping = TextWrapping.Wrap;
-            textBlock.Tag = amPm + hourAndMinute;
+            textBlock.Tag = scheduledTask;
 
             bool indexFound = false;
             int index = 0;
@@ -112,7 +112,7 @@ namespace WeeklyScheduler
             while (!indexFound && index < dayPanel.Children.Count)
             {
                 TextBlock child = dayPanel.Children[index] as TextBlock;
-                if ((textBlock.Tag as string).CompareTo(child.Tag as string) < 0)
+                if ((textBlock.Tag as ScheduledTask).Time.CompareTo((child.Tag as ScheduledTask).Time) < 0)
                 {
                     indexFound = true;
                 }
@@ -226,10 +226,61 @@ namespace WeeklyScheduler
             string name = nameTextBox.Text.Trim();
             if (date != null && name != "")
             {
-                string html = Export.HTMLBuilder.GenerateHTML(name, date.Value);
+                string html = Export.HTMLBuilder.GenerateHTML(name, date.Value, generateListOfScheduledTasks());
                 Export.HTMLConverter.convertHTML("schedule.pdf", html);
                 Console.WriteLine(html);
             }
+        }
+
+        private List<List<ScheduledTask>> generateListOfScheduledTasks()
+        {
+            List<List<ScheduledTask>> days = new List<List<ScheduledTask>>();
+            List<ScheduledTask> sunday = new List<ScheduledTask>();
+            List<ScheduledTask> monday = new List<ScheduledTask>();
+            List<ScheduledTask> tuesday = new List<ScheduledTask>();
+            List<ScheduledTask> wednesday = new List<ScheduledTask>();
+            List<ScheduledTask> thursday = new List<ScheduledTask>();
+            List<ScheduledTask> friday = new List<ScheduledTask>();
+            List<ScheduledTask> saturday = new List<ScheduledTask>();
+
+            foreach (TextBlock textBlock in SundayPanel.Children)
+            {
+                sunday.Add(textBlock.Tag as ScheduledTask);
+            }
+            foreach (TextBlock textBlock in MondayPanel.Children)
+            {
+                monday.Add(textBlock.Tag as ScheduledTask);
+            }
+            foreach (TextBlock textBlock in TuesdayPanel.Children)
+            {
+                tuesday.Add(textBlock.Tag as ScheduledTask);
+            }
+            foreach (TextBlock textBlock in WednesdayPanel.Children)
+            {
+                wednesday.Add(textBlock.Tag as ScheduledTask);
+            }
+            foreach (TextBlock textBlock in ThursdayPanel.Children)
+            {
+                thursday.Add(textBlock.Tag as ScheduledTask);
+            }
+            foreach (TextBlock textBlock in FridayPanel.Children)
+            {
+                friday.Add(textBlock.Tag as ScheduledTask);
+            }
+            foreach (TextBlock textBlock in SaturdayPanel.Children)
+            {
+                saturday.Add(textBlock.Tag as ScheduledTask);
+            }
+
+            days.Add(sunday);
+            days.Add(monday);
+            days.Add(tuesday);
+            days.Add(wednesday);
+            days.Add(thursday);
+            days.Add(friday);
+            days.Add(saturday);
+
+            return days;
         }
     }
 }
