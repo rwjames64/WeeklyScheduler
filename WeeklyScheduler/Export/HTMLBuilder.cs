@@ -44,16 +44,13 @@ namespace WeeklyScheduler.Export
 
             // Header styles
             css.Append("#Header { ");
+            css.Append("font-size: 2em; ");
             css.Append("margin: 2em; ");
             css.Append("text-align: center; ");
             css.Append("} ");
 
             css.Append("#Header span { ");
             css.Append("margin: 0 1.5em; ");
-            css.Append("} ");
-
-            css.Append("#Header .title { ");
-            css.Append("font-size: 2em; ");
             css.Append("} ");
 
             // Content styles
