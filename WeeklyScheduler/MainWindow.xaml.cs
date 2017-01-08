@@ -228,7 +228,7 @@ namespace WeeklyScheduler
             {
                 DateTime date = nullableDate.Value;
                 SaveFileDialog dialog = new SaveFileDialog();
-                dialog.FileName = "schedule " + date.Year + date.Month.ToString("") + date.Day.ToString("");
+                dialog.FileName = "schedule " + date.Year + date.Month.ToString("00") + date.Day.ToString("00");
                 dialog.DefaultExt = ".pdf";
                 dialog.Filter = "PDF Documents (.pdf)|*.pdf";
                 Nullable<bool> result = dialog.ShowDialog();

@@ -33,7 +33,9 @@ namespace WeeklyScheduler.Task
 
             if (result == 0)
             {
-                result = hour - task.hour;
+                int hourA = (hour == 12 ? 0 : hour);
+                int hourB = (task.hour == 12 ? 0 : task.hour);
+                result = hourA - hourB;
             }
 
             if (result == 0)
