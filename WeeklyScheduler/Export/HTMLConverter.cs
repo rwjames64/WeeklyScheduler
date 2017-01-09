@@ -1,9 +1,10 @@
-﻿using System;
+﻿using HiQPdf;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IronPdf;
 
 namespace WeeklyScheduler.Export
 {
@@ -11,10 +12,13 @@ namespace WeeklyScheduler.Export
     {
         public static void convertHTML(string pdfFile, string html)
         {
-            HtmlToPdf htmlToPdf = new HtmlToPdf();
-            htmlToPdf.PrintOptions.PaperOrientation = PdfPrintOptions.PdfPaperOrientation.Landscape;
-            PdfResource PDF = htmlToPdf.RenderHtmlAsPdf(html);
-            PDF.SaveAs(pdfFile);
+            HtmlToPdf converter = new HtmlToPdf();
+            if (File.Exists(pdfFile))
+            {
+                File.Delete(pdfFile);
+            }
+            converter.Document.PageOrientation = PdfPageOrientation.Landscape;
+            converter.ConvertHtmlToFile(html, "", pdfFile);
         }
     }
 }

@@ -29,6 +29,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,8 +52,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IronPdf, Version=4.4.0.25038, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPdf.4.4.0.1\lib\net40\IronPdf.dll</HintPath>
+    <Reference Include="HiQPdf.Free, Version=10.5.0.0, Culture=neutral, PublicKeyToken=acd8b62594985b24, processorArchitecture=MSIL">
+      <HintPath>..\packages\hiqpdf.free.10.5\lib\net40\HiQPdf.Free.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
