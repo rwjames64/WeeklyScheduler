@@ -228,27 +228,7 @@ namespace WeeklyScheduler
             if (nullableDate != null && name != "")
             {
                 DateTime date = nullableDate.Value;
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.FileName = "schedule " + date.Year + date.Month.ToString("00") + date.Day.ToString("00");
-                dialog.DefaultExt = ".pdf";
-                dialog.Filter = "PDF Documents (.pdf)|*.pdf";
-                Nullable<bool> result = dialog.ShowDialog();
-
-                if (result == true)
-                {
-                    try
-                    {
-                        string html = Export.HTMLBuilder.GenerateHTML(name, date, generateListOfScheduledTasks());
-                        Export.HTMLConverter.convertHTML(dialog.FileName, html);
-                        Debug.WriteLine(html);
-
-                        Process.Start(@dialog.FileName);
-                    }
-                    catch (IOException ex)
-                    {
-                        MessageBox.Show(ex.Message, "File Error");
-                    }
-                }
+                exportPDF(name, date);
             }
             else
             {
@@ -264,6 +244,31 @@ namespace WeeklyScheduler
                 }
 
                 MessageBox.Show(message, "Unable to export to PDF");
+            }
+        }
+
+        private void exportPDF(string name, DateTime date)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.FileName = "schedule " + date.Year + date.Month.ToString("00") + date.Day.ToString("00");
+            dialog.DefaultExt = ".pdf";
+            dialog.Filter = "PDF Documents (.pdf)|*.pdf";
+            Nullable<bool> result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                try
+                {
+                    string html = Export.HTMLBuilder.GenerateHTML(name, date, generateListOfScheduledTasks());
+                    Export.HTMLConverter.convertHTML(dialog.FileName, html);
+                    Debug.WriteLine(html);
+
+                    Process.Start(@dialog.FileName);
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message, "File Error");
+                }
             }
         }
 
