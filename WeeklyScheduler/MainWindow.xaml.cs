@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -235,11 +236,18 @@ namespace WeeklyScheduler
 
                 if (result == true)
                 {
-                    string html = Export.HTMLBuilder.GenerateHTML(name, date, generateListOfScheduledTasks());
-                    Export.HTMLConverter.convertHTML(dialog.FileName, html);
-                    Debug.WriteLine(html);
+                    try
+                    {
+                        string html = Export.HTMLBuilder.GenerateHTML(name, date, generateListOfScheduledTasks());
+                        Export.HTMLConverter.convertHTML(dialog.FileName, html);
+                        Debug.WriteLine(html);
 
-                    Process.Start(@dialog.FileName);
+                        Process.Start(@dialog.FileName);
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show(ex.Message, "File Error");
+                    }
                 }
             }
             else
