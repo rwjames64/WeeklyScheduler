@@ -13,10 +13,6 @@ namespace WeeklyScheduler.Export
         public static void convertHTML(string pdfFile, string html)
         {
             HtmlToPdf converter = new HtmlToPdf();
-            if (File.Exists(pdfFile))
-            {
-                File.Delete(pdfFile);
-            }
             converter.Document.PageOrientation = PdfPageOrientation.Landscape;
             converter.ConvertHtmlToFile(html, "", pdfFile);
         }
