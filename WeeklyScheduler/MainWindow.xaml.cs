@@ -278,34 +278,13 @@ namespace WeeklyScheduler
             List<ScheduledTask> friday = new List<ScheduledTask>();
             List<ScheduledTask> saturday = new List<ScheduledTask>();
 
-            foreach (TextBlock textBlock in SundayPanel.Children)
-            {
-                sunday.Add(textBlock.Tag as ScheduledTask);
-            }
-            foreach (TextBlock textBlock in MondayPanel.Children)
-            {
-                monday.Add(textBlock.Tag as ScheduledTask);
-            }
-            foreach (TextBlock textBlock in TuesdayPanel.Children)
-            {
-                tuesday.Add(textBlock.Tag as ScheduledTask);
-            }
-            foreach (TextBlock textBlock in WednesdayPanel.Children)
-            {
-                wednesday.Add(textBlock.Tag as ScheduledTask);
-            }
-            foreach (TextBlock textBlock in ThursdayPanel.Children)
-            {
-                thursday.Add(textBlock.Tag as ScheduledTask);
-            }
-            foreach (TextBlock textBlock in FridayPanel.Children)
-            {
-                friday.Add(textBlock.Tag as ScheduledTask);
-            }
-            foreach (TextBlock textBlock in SaturdayPanel.Children)
-            {
-                saturday.Add(textBlock.Tag as ScheduledTask);
-            }
+            fillListWithScheduledTasksForDay(sunday, SundayPanel);
+            fillListWithScheduledTasksForDay(monday, MondayPanel);
+            fillListWithScheduledTasksForDay(tuesday, TuesdayPanel);
+            fillListWithScheduledTasksForDay(wednesday, WednesdayPanel);
+            fillListWithScheduledTasksForDay(thursday, ThursdayPanel);
+            fillListWithScheduledTasksForDay(friday, FridayPanel);
+            fillListWithScheduledTasksForDay(saturday, SaturdayPanel);
 
             days.Add(sunday);
             days.Add(monday);
@@ -316,6 +295,14 @@ namespace WeeklyScheduler
             days.Add(saturday);
 
             return days;
+        }
+
+        private void fillListWithScheduledTasksForDay(List<ScheduledTask> tasksForDay, StackPanel dayPanel)
+        {
+            foreach (TextBlock textBlock in dayPanel.Children)
+            {
+                tasksForDay.Add(textBlock.Tag as ScheduledTask);
+            }
         }
     }
 }
