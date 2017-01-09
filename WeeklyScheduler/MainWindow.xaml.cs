@@ -232,19 +232,24 @@ namespace WeeklyScheduler
             }
             else
             {
-                string message = "The following information is missing:";
-
-                if (name == "")
-                {
-                    message += "\nName";
-                }
-                if (nullableDate == null)
-                {
-                    message += "\nStart Date";
-                }
-
-                MessageBox.Show(message, "Unable to export to PDF");
+                displayMissingInfoForExportMessageBox(nullableDate, name);
             }
+        }
+
+        private static void displayMissingInfoForExportMessageBox(DateTime? nullableDate, string name)
+        {
+            string message = "The following information is missing:";
+
+            if (name == "")
+            {
+                message += "\nName";
+            }
+            if (nullableDate == null)
+            {
+                message += "\nStart Date";
+            }
+
+            MessageBox.Show(message, "Unable to export to PDF");
         }
 
         private void exportPDF(string name, DateTime date)
