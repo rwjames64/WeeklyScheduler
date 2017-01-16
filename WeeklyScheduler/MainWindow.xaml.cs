@@ -98,8 +98,8 @@ namespace WeeklyScheduler
             contextMenu.Items.Add(removeMenuItem);
 
             textBlock.Text = task.Time + "\n" +
-                task.Title + "\n" +
-                task.Description;
+                task.Title + 
+                (task.Details == "" ? "" : "\n" + task.Details);
 
             textBlock.ContextMenu = contextMenu;
             textBlock.Margin = new Thickness(0, 0, 0, 5);
@@ -163,7 +163,7 @@ namespace WeeklyScheduler
 
             if (!dialog.cancelled)
             {
-                WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task(dialog.titleTextBox.Text, dialog.descriptionTextBox.Text);
+                WeeklyScheduler.Task.Task task = new WeeklyScheduler.Task.Task(dialog.titleTextBox.Text);
                 if (TaskAdapter.GetInstance().AddTask(task))
                 {
                     AddTaskTitleToTasksWrapPanel(task.Title);
@@ -216,7 +216,7 @@ namespace WeeklyScheduler
                 int hour = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.hourComboBox.SelectedIndex+1);
                 int minute = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.minuteComboBox.SelectedIndex*15);
                 string amPm = (dialog.noTimeCheckBox.IsChecked == true ? "" : (dialog.amPmComboBox.SelectedItem as ComboBoxItem).Content.ToString());
-                ScheduledTask task = new ScheduledTask(title, TaskAdapter.GetInstance().GetTask(title).Description, hour, minute, amPm);
+                ScheduledTask task = new ScheduledTask(title, "", hour, minute, amPm);
                 AddTaskToDay(task, dayPanel);
             }
         }

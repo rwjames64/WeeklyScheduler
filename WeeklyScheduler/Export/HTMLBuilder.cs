@@ -153,7 +153,6 @@ namespace WeeklyScheduler.Export
                 day.Append("<div class=\"scheduledTask\">");
                 day.Append("<p>" + task.Time + "</p>");
                 day.Append("<p>" + task.Title + "</p>");
-                day.Append("<p>" + task.Description + "</p>");
                 day.Append("</div>");
             }
 

@@ -9,14 +9,24 @@ namespace WeeklyScheduler.Task
     class ScheduledTask : Task, IComparable<ScheduledTask>
     {
         private string amPm;
+        private string details;
         private int hour;
         private int minute;
 
-        public ScheduledTask(string title, string description, int hour, int minute, string amPm) : base(title, description)
+        public ScheduledTask(string title, string details, int hour, int minute, string amPm) : base(title)
         {
+            this.details = details;
             this.amPm = amPm;
             this.hour = hour;
             this.minute = minute;
+        }
+
+        public string Details
+        {
+            get
+            {
+                return details;
+            }
         }
 
         public string Time
@@ -50,7 +60,7 @@ namespace WeeklyScheduler.Task
 
             if (result == 0)
             {
-                result = Description.CompareTo(task.Description);
+                result = Details.CompareTo(task.Details);
             }
 
             return result;

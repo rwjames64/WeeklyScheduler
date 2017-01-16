@@ -8,10 +8,9 @@ namespace WeeklyScheduler.Task
 {
     public class Task
     {
-        public Task(string title, string description)
+        public Task(string title)
         {
             Title = title;
-            Description = description;
         }
 
         private string title;
@@ -25,20 +24,6 @@ namespace WeeklyScheduler.Task
             set
             {
                 title = value.Trim();
-            }
-        }
-
-        private string description;
-        public string Description
-        {
-            get
-            {
-                return description;
-            }
-
-            set
-            {
-                description = value.Trim();
             }
         }
     }

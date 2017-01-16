@@ -63,7 +63,6 @@ namespace WeeklyScheduler.Task
             {
                 XmlElement taskElement = document.CreateElement("task");
                 taskElement.SetAttribute("title", task.Title);
-                taskElement.SetAttribute("description", task.Description);
                 root.AppendChild(taskElement);
 
                 document.Save(FILE_NAME);
@@ -111,8 +110,7 @@ namespace WeeklyScheduler.Task
 
             if (element != null)
             {
-                string description = element.GetAttribute("description");
-                task = new WeeklyScheduler.Task.Task(title, description);
+                task = new WeeklyScheduler.Task.Task(title);
             }
 
             return task;

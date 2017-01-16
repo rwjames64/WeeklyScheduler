@@ -35,7 +35,7 @@ namespace WeeklyScheduler
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            if (titleTextBox.Text != "")
+            if (titleTextBox.Text.Trim() != "")
             {
                 cancelled = false;
                 this.Close();
