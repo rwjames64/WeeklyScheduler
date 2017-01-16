@@ -38,5 +38,19 @@ namespace WeeklyScheduler.UI
             Cancelled = false;
             Close();
         }
+
+        private void useTimeCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            hourComboBox.IsEnabled = true;
+            minuteComboBox.IsEnabled = true;
+            amPmComboBox.IsEnabled = true;
+        }
+
+        private void useTimeCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            hourComboBox.IsEnabled = false;
+            minuteComboBox.IsEnabled = false;
+            amPmComboBox.IsEnabled = false;
+        }
     }
 }

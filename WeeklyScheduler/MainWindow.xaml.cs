@@ -213,9 +213,9 @@ namespace WeeklyScheduler
             {
                 string title = e.Data.GetData("title") as string;
                 StackPanel dayPanel = sender as StackPanel;
-                int hour = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.hourComboBox.SelectedIndex+1);
-                int minute = (dialog.noTimeCheckBox.IsChecked == true ? 0 : dialog.minuteComboBox.SelectedIndex*15);
-                string amPm = (dialog.noTimeCheckBox.IsChecked == true ? "" : (dialog.amPmComboBox.SelectedItem as ComboBoxItem).Content.ToString());
+                int hour = (dialog.useTimeCheckBox.IsChecked == false ? 0 : dialog.hourComboBox.SelectedIndex+1);
+                int minute = (dialog.useTimeCheckBox.IsChecked == false ? 0 : dialog.minuteComboBox.SelectedIndex*15);
+                string amPm = (dialog.useTimeCheckBox.IsChecked == false ? "" : (dialog.amPmComboBox.SelectedItem as ComboBoxItem).Content.ToString());
                 ScheduledTask task = new ScheduledTask(title, "", hour, minute, amPm);
                 AddTaskToDay(task, dayPanel);
             }
