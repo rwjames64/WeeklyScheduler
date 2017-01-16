@@ -15,7 +15,7 @@ namespace WeeklyScheduler.Task
 
         public ScheduledTask(string title, string details, int hour, int minute, string amPm) : base(title)
         {
-            this.details = details;
+            this.details = details.Trim();
             this.amPm = amPm;
             this.hour = hour;
             this.minute = minute;

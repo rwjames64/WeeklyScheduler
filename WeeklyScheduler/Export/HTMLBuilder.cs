@@ -156,6 +156,10 @@ namespace WeeklyScheduler.Export
                     day.Append("<p>" + task.Time + "</p>");
                 }
                 day.Append("<p>" + task.Title + "</p>");
+                if (task.Details != "")
+                {
+                    day.Append("<p>" + task.Details + "</p>");
+                }
                 day.Append("</div>");
             }
 

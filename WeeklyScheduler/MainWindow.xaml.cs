@@ -216,7 +216,8 @@ namespace WeeklyScheduler
                 int hour = (dialog.useTimeCheckBox.IsChecked == false ? 0 : dialog.hourComboBox.SelectedIndex+1);
                 int minute = (dialog.useTimeCheckBox.IsChecked == false ? 0 : dialog.minuteComboBox.SelectedIndex*15);
                 string amPm = (dialog.useTimeCheckBox.IsChecked == false ? "" : (dialog.amPmComboBox.SelectedItem as ComboBoxItem).Content.ToString());
-                ScheduledTask task = new ScheduledTask(title, "", hour, minute, amPm);
+                string details = dialog.detailsTextBox.Text;
+                ScheduledTask task = new ScheduledTask(title, details, hour, minute, amPm);
                 AddTaskToDay(task, dayPanel);
             }
         }
