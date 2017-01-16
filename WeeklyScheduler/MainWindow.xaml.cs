@@ -97,7 +97,7 @@ namespace WeeklyScheduler
             removeMenuItem.Click += new RoutedEventHandler(ScheduledTaskItem_RemoveClicked);
             contextMenu.Items.Add(removeMenuItem);
 
-            textBlock.Text = task.Time + "\n" +
+            textBlock.Text = (task.Time != "" ? task.Time + "\n" : "") +
                 task.Title + 
                 (task.Details == "" ? "" : "\n" + task.Details);
 

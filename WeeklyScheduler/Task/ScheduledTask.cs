@@ -33,7 +33,7 @@ namespace WeeklyScheduler.Task
         {
             get
             {
-                return hour.ToString("00") + ":" + minute.ToString("00") + " " + amPm;
+                return (amPm != "" ? hour.ToString("00") + ":" + minute.ToString("00") + " " + amPm : "");
             }
         }
 

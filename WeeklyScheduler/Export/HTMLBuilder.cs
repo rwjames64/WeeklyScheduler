@@ -151,7 +151,10 @@ namespace WeeklyScheduler.Export
             foreach (ScheduledTask task in tasks)
             {
                 day.Append("<div class=\"scheduledTask\">");
-                day.Append("<p>" + task.Time + "</p>");
+                if (task.Time != "")
+                {
+                    day.Append("<p>" + task.Time + "</p>");
+                }
                 day.Append("<p>" + task.Title + "</p>");
                 day.Append("</div>");
             }
